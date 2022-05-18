@@ -1,0 +1,2 @@
+export const GET_REPONSE = "GET_RESPONSE";
+export const GET_RESPONSE_FAIL = "GET_RESPONSE_FAIL";
