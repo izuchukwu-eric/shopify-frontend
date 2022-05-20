@@ -11,6 +11,7 @@ export default function (state = initialState, action) {
 
     switch (type) {
         case GET_RESPONSE:
+            localStorage.setItem("response", payload);
             return {
                 ...state,
                 isAuthenticated: true,

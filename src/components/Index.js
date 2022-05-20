@@ -40,7 +40,7 @@ const Index = ({ getResponse, request: { response } }) => {
                 <div className="py-6 border-gray-200 flex">
                   <div className='font-bold'>Response:</div>
                   <div className='px-3'>
-                    {response && response.choices[0].text}
+                    {response && response}
                   </div>
                 </div>
               </div>
