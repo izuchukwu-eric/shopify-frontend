@@ -25,11 +25,14 @@ const Index = ({ getResponse, request: { response, loading } }) => {
   const onSubmit = () => {
     getResponse(name);
     progress.start();
+    setTimeout(() => {
+      progress.finish();
+    }, 5000);
   }
   
-  if (loading == false) {
-    progress.finish();
-  }
+  // if (loading == false) {
+  //   progress.finish();
+  // }
 
   return (  
     <>
@@ -46,7 +49,7 @@ const Index = ({ getResponse, request: { response, loading } }) => {
     
       <div className='max-w-2xl mx-auto'>
         {
-          response ? ( 
+          response.length > 0 ? ( 
           <p className="font-bold text-2xl">Responses</p>
           ) 
           : 
@@ -55,7 +58,7 @@ const Index = ({ getResponse, request: { response, loading } }) => {
           )
         }
         { response.length > 0 && (
-          response?.reverse().map((response, index) => (
+          response?.map((response, index) => (
             <>
               <div className="py-6">
                 <div className="p-6 bg-gray-200 border-b border-gray-200 rounded-xl" key={index}>

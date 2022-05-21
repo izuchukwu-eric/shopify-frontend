@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                ...state.response.push(payload)
+                ...state.response.unshift(payload)
             }
         case GET_RESPONSE_FAIL: 
             return {
