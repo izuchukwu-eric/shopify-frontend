@@ -22,7 +22,7 @@ export const getResponse = ( name ) => async (dispatch) => {
         
         dispatch({
             type: GET_RESPONSE,
-            payload: response.data.choices[0].text,
+            payload: {result: response.data.choices[0].text, prompt: name }
         });
     } catch (err) {
         const errors = err.response.data.errors;

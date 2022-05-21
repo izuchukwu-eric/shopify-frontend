@@ -3,7 +3,7 @@ import {GET_RESPONSE, GET_RESPONSE_FAIL} from "../actions/types"
 const initialState = {
     isAuthenticated: null,
     loading: true,
-    response: null
+    response: []
 };
 
 export default function (state = initialState, action) {
@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                response: payload,
+                ...state.response.push(payload)
             }
         case GET_RESPONSE_FAIL: 
             return {
