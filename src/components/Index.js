@@ -1,18 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getResponse } from '../actions/request';
 import ProgressBar from "@badrap/bar-of-progress";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 
-const Index = ({ getResponse, request: { response, loading } }) => {
+const Index = ({ getResponse, request: { response } }) => {
   const [formData, setFormData] = useState({name: ""})
   
   const {name} = formData;
   
   const onChange = (e) =>
   setFormData({ ...formData, [e.target.name]: e.target.value });
-  
+
+  const notyf = new Notyf({ position: { x: "right", y: "top" } });
 
   const progress = new ProgressBar({
     size: 4,
@@ -21,19 +24,17 @@ const Index = ({ getResponse, request: { response, loading } }) => {
     delay: 100,
   });
 
-
   const onSubmit = () => {
-    getResponse(name);
-    progress.start();
-    setTimeout(() => {
-      progress.finish();
-    }, 5000);
+    if (name !== "") {
+      progress.start();
+      getResponse(name).then(() => progress.finish());
+      setFormData({name: ""})
+    } else {
+      notyf.error("Please enter a prompt!");
+    }
+    
   }
   
-  // if (loading == false) {
-  //   progress.finish();
-  // }
-
   return (  
     <>
     <div className="max-w-2xl mx-auto my-8">
@@ -50,12 +51,12 @@ const Index = ({ getResponse, request: { response, loading } }) => {
       <div className='max-w-2xl mx-auto'>
         {
           response.length > 0 ? ( 
-          <p className="font-bold text-2xl">Responses</p>
-          ) 
-          : 
-          ( 
-          <p className="font-bold text-2xl hidden">Responses</p>
-          )
+             <p className="font-bold text-2xl">Responses</p>
+            ) 
+            : 
+            ( 
+              <p className="font-bold text-2xl hidden">Responses</p>
+            )
         }
         { response.length > 0 && (
           response?.map((response, index) => (

@@ -8,8 +8,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 export const getResponse = ( name ) => async (dispatch) => {
-
-    console.log(name)
     try {
         const response = await openai.createCompletion("text-davinci-002", {
             prompt: `Write a detailed, smart, informative definition for ${name}`,
