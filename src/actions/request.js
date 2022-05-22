@@ -9,7 +9,7 @@ const openai = new OpenAIApi(configuration)
 
 export const getResponse = ( name ) => async (dispatch) => {
     try {
-        const response = await openai.createCompletion("text-davinci-002", {
+        const response = await openai.createCompletion("text-curie-001", {
             prompt: `Write a detailed, smart, informative definition for ${name}`,
             temperature: 0.8,
             max_tokens: 256,
